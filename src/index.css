@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Print styles ─────────────────────────────────────────── */
+@media print {
+  /* Hide everything by default */
+  body > * {
+    display: none !important;
+  }
+
+  /* Show only the print document container */
+  body > .print-document {
+    display: block !important;
+  }
+
+  /* A4 page with zero margins */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* The document fills the full A4 width */
+  .print-document {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  /* Ensure clean page breaks */
+  table {
+    page-break-inside: avoid;
+  }
+
+  /* Remove shadows for print */
+  * {
+    box-shadow: none !important;
+  }
+}
+
+/* ── On-screen styling for the print document ────────────── */
+/* Hidden on screen, only visible when printing */
+.print-document {
+  display: none;
+}
+
+/* ── Document layout (shared by Lab & Certificate) ────────── */
+.doc-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 40px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0f172a;
+  text-align: left;
+  line-height: 1.5;
+  background: #fff;
+}
+
+.doc-header {
+  text-align: center;
+  border-bottom: 2px solid #0d9488;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+.doc-clinic-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.doc-sub {
+  font-size: 9px;
+  color: #475569;
+  margin-top: 3px;
+}
+.doc-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f766e;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+.doc-section-title {
+  background: #e0f2fe;
+  border-left: 4px solid #0284c7;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0c4a6e;
+  margin: 12px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.doc-data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 16px;
+}
+.doc-data-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+.doc-label {
+  color: #64748b;
+  min-width: 130px;
+  font-weight: 600;
+}
+.doc-value {
+  color: #0f172a;
+}
+.doc-hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 12px 0;
+}
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+.doc-th {
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: left;
+  background: #e0f2fe;
+  color: #0c4a6e;
+}
+.doc-td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 10px;
+  text-align: left;
+}
+.doc-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 9px;
+  font-weight: 700;
+  border: 1px solid;
+}
+.badge-pos {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+.badge-neg {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #86efac;
+}
+.badge-neutral {
+  background: #f8fafc;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+.doc-obs {
+  background: #f8fafc;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 10px;
+  color: #334155;
+  min-height: 50px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  text-align: left;
+}
+.doc-photo {
+  text-align: center;
+  margin: 8px 0;
+}
+.doc-photo img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  object-fit: contain;
+}
+.doc-signature {
+  margin-top: 24px;
+}
+.doc-signature-img {
+  display: block;
+  max-width: 200px;
+  margin: 0 auto;
+  height: 80px;
+  object-fit: contain;
+}
+.doc-signature-line {
+  border-top: 1px solid #0f172a;
+  width: 200px;
+  margin-bottom: 4px;
+}
+.doc-signature-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.doc-signature-role {
+  font-size: 9px;
+  color: #475569;
+}
