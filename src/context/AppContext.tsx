@@ -241,7 +241,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setDebts(prev => prev.map(d => {
       if (d.id !== debtId) return d;
       const totalPaidBefore = d.payments.reduce((s, p) => s + p.amount, 0);
-      const commissionEarned = payment.commissionEarned ?? getAbanoCommissionAtPayment(d.serviceType, payment.amount, d.totalAmount, totalPaidBefore);
+      const commissionEarned = getAbanoCommissionAtPayment(d.serviceType, payment.amount, d.totalAmount, totalPaidBefore);
       return { ...d, payments: [...d.payments, { ...payment, commissionEarned }] };
     })), [getAbanoCommissionAtPayment]);
   const deleteDebtPayment = useCallback((debtId: string, paymentId: string) =>
@@ -304,7 +304,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const sortedPayments = [...d.payments].sort((a, b) => a.date.localeCompare(b.date));
       for (const p of sortedPayments) {
         if (p.date >= weekStartStr && p.date <= weekEndStr) {
-          const commission = p.commissionEarned ?? getAbanoCommissionAtPayment(d.serviceType, p.amount, d.totalAmount, cumulativePaid);
+          const commission = getAbanoCommissionAtPayment(d.serviceType, p.amount, d.totalAmount, cumulativePaid);
           if (commission > 0) {
             debtCommissions.push({ debt: d, payment: p, commission });
           }
