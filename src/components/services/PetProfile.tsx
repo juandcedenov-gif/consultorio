@@ -15,10 +15,14 @@ import {
   Check,
   Download,
   Paperclip,
+  FlaskConical,
+  Award,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import type { ServiceRecord } from '../../types';
 import ServiceForm from './ServiceForm';
+import LabResultForm from '../lab/LabResultForm';
+import HealthCertificateForm from '../certificates/HealthCertificateForm';
 
 interface Props {
   petId: string;
@@ -75,6 +79,8 @@ export default function PetProfile({ petId, onBack }: Props) {
   const [editing, setEditing] = useState<ServiceRecord | null>(null);
   const [printModalOpen, setPrintModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<Set<string>>(new Set());
+  const [labFormOpen, setLabFormOpen] = useState(false);
+  const [certFormOpen, setCertFormOpen] = useState(false);
 
   const pet = pets.find(p => p.id === petId);
   const owner = owners.find(o => o.id === pet?.ownerId);
@@ -129,6 +135,18 @@ export default function PetProfile({ petId, onBack }: Props) {
           <ArrowLeft size={16} /> Volver
         </button>
         <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setLabFormOpen(true)}
+            className="print:hidden flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-slate-600 text-sm hover:bg-slate-50 transition-colors"
+          >
+            <FlaskConical size={15} /> Laboratorio
+          </button>
+          <button
+            onClick={() => setCertFormOpen(true)}
+            className="print:hidden flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-slate-600 text-sm hover:bg-slate-50 transition-colors"
+          >
+            <Award size={15} /> Cert. Salud
+          </button>
           <button
             onClick={() => {
               setSelectedServices(new Set(petServices.map(s => s.id)));
@@ -200,6 +218,22 @@ export default function PetProfile({ petId, onBack }: Props) {
           initial={editing ?? undefined}
           onSave={handleSave}
           onClose={() => { setFormOpen(false); setEditing(null); }}
+        />
+      )}
+
+      {labFormOpen && (
+        <LabResultForm
+          petId={petId}
+          ownerId={pet.ownerId}
+          onClose={() => setLabFormOpen(false)}
+        />
+      )}
+
+      {certFormOpen && (
+        <HealthCertificateForm
+          petId={petId}
+          ownerId={pet.ownerId}
+          onClose={() => setCertFormOpen(false)}
         />
       )}
 
